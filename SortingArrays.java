@@ -4,13 +4,14 @@ import java.util.List;
 public class SortingArrays {
 
     public static void main(String[] args) {
-        Integer[] array = new Integer[] { 29, 27, 77, 49, 75, 35, 9, 30, 95, 28 };
+        Integer[] array = new Integer[] {29, 27, 77, 49, 75, 35, 9, 30, 95, 28};
 
         // SortingArrays.bubbleSort(array);
         // SortingArrays.selectSort(array);
         // SortingArrays.insertionSort(array);
-        Integer[] l = SortingArrays.mergeSort(array);
-        System.out.println(Arrays.asList(l));
+        // Integer[] l = SortingArrays.mergeSort(array);
+        SortingArrays.quickSort(array, 0, array.length);
+        System.out.println(Arrays.asList(array));
 
     }
 
@@ -99,11 +100,43 @@ public class SortingArrays {
         return array;
     }
 
-    private static void addTheRest(Integer[] sortedArray, int sortedIndex, Integer[] rest, int index) {
+    private static void addTheRest(Integer[] sortedArray, int sortedIndex, Integer[] rest,
+            int index) {
         for (; index < rest.length; index++) {
             sortedArray[sortedIndex] = rest[index];
             sortedIndex++;
         }
+    }
+
+    public static void quickSort(Integer[] array, int start, int end) {
+        if (end - start < 2) {
+            return;
+        }
+        int pivotIndex = partition(array, start, end);
+
+        quickSort(array, start, pivotIndex);
+        quickSort(array, pivotIndex + 1, end);
+    }
+
+    private static int partition(Integer[] array, int start, int end) {
+        int pivot = array[start];// 35
+        int rightIndex = end;// 7
+        int leftIndex = start;// 4
+
+        while (leftIndex < rightIndex) {
+
+            while (leftIndex < rightIndex && array[--rightIndex] >= pivot);
+            if (leftIndex < rightIndex)
+                array[leftIndex] = array[rightIndex];
+
+            while (leftIndex < rightIndex && array[++leftIndex] <= pivot);
+            if (leftIndex < rightIndex)
+                array[rightIndex] = array[leftIndex];
+
+        }
+
+        array[leftIndex] = pivot;
+        return leftIndex;
     }
 
 }
