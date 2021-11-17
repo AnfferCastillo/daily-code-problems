@@ -1,3 +1,4 @@
+import java.sql.RowId;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +11,9 @@ public class SortingArrays {
         // SortingArrays.selectSort(array);
         // SortingArrays.insertionSort(array);
         // Integer[] l = SortingArrays.mergeSort(array);
-        SortingArrays.quickSort(array, 0, array.length);
+        //SortingArrays.quickSort(array, 0, array.length);
+        //SortingArrays.mergeSort2(array, 0, array.length);
+        SortingArrays.recursiveInsertionSort(array, array.length);
         System.out.println(Arrays.asList(array));
 
     }
@@ -63,6 +66,26 @@ public class SortingArrays {
         }
     }
 
+    public static void recursiveInsertionSort(Integer[] array, int numItems) {
+        if(numItems < 2) {
+            return;
+        }
+
+        recursiveInsertionSort(array, --numItems);
+
+        int currentItem = array[numItems];
+        int j = numItems - 1;
+
+        while (j >= 0 && array[j] > currentItem) {
+            array[j + 1] = array[j];
+            j--;
+        }
+
+        array[j + 1] = currentItem;
+
+    }
+
+
     public static Integer[] mergeSort(Integer[] array) {
         if (array.length == 1)
             return array;
@@ -98,6 +121,36 @@ public class SortingArrays {
         }
 
         return array;
+    }
+
+    //{27}
+    //{29, 27, 23, 49, 75, 35, 9, 30, 95, 28}
+    public static void mergeSort2(Integer[] array, int start, int end) {
+        //Array of size 1
+        if ((end - start) < 2)
+            return;
+
+        int mid = (end + start) / 2;
+            
+        mergeSort2(array, start, mid);
+        mergeSort2(array, mid, end);
+
+        int sortedIndex = 0;
+        int leftIndex = start;
+        int rightIndex = mid;
+        Integer[] aux = new Integer[end - start];
+
+        if (array[mid - 1] >= array[mid]) {
+            return;
+        }
+ 
+        while(leftIndex < mid && rightIndex < end ) {
+            aux[sortedIndex++] = array[leftIndex] >= array[rightIndex] ? array[leftIndex++] : array[rightIndex++];
+        } 
+
+        System.arraycopy(array, leftIndex, array, start + sortedIndex, mid - leftIndex);
+        System.arraycopy(aux, 0, array, start, sortedIndex);
+        
     }
 
     private static void addTheRest(Integer[] sortedArray, int sortedIndex, Integer[] rest,
