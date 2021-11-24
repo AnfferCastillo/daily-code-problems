@@ -46,6 +46,25 @@ public class MyDoubleLinkedList {
         System.out.println(list);
         System.out.println("Tail is: " + list.getTail() + " HEad is: " + list.getHead() + " Size: " + list.getSize());
 
+        var node6 = new MyDoubleLinkedNode(6);
+        var node7 = new MyDoubleLinkedNode(7);
+        var node8 = new MyDoubleLinkedNode(8);
+        var node9 = new MyDoubleLinkedNode(9);
+
+        list.addToBack(node7);
+        list.addToBack(node9);
+
+        System.out.println(list);
+        System.out.println("Tail is: " + list.getTail() + " HEad is: " + list.getHead() + " Size: " + list.getSize());
+
+
+        list.addBefore(node6, node7);
+        list.addBefore(node8, node9);
+        
+        System.out.println(list);
+        System.out.println("Tail is: " + list.getTail() + " HEad is: " + list.getHead() + " Size: " + list.getSize());
+
+
     }
 
     public int size() {
@@ -75,7 +94,7 @@ public class MyDoubleLinkedList {
 
         var removed = head;
         head = head.getNext();
-        if(head != null) {
+        if (head != null) {
             head.setPrevius(null);
             removed.setNext(null);
         } else {
@@ -103,7 +122,7 @@ public class MyDoubleLinkedList {
 
         var removed = tail;
         tail = tail.getPrevius();
-        if(tail != null) {
+        if (tail != null) {
             tail.setNext(null);
             removed.setNext(null);
             removed.setPrevius(null);
@@ -112,6 +131,31 @@ public class MyDoubleLinkedList {
         }
 
         size--;
+    }
+
+    public boolean addBefore(MyDoubleLinkedNode node, MyDoubleLinkedNode existing) {
+        if (head == null) {
+            return false;
+        }
+
+        var current = head;
+        while (current != null && !current.equals(existing)) {
+            current = current.getNext();
+        }
+
+        if (current == null) {
+            return false;
+        } else if (current == head) {
+            addRoFront(node);
+            return true;
+        } 
+        
+        node.setNext(current);
+        node.setPrevius(current.getPrevius());
+        current.getPrevius().setNext(node);
+        current.setPrevius(node);
+
+        return true;
     }
 
     @Override
