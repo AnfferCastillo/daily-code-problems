@@ -22,8 +22,7 @@ public class Palindrome {
         var auxString2 = "";
 
         for (char c : string.toLowerCase().toCharArray()) {
-            int test = c;
-            if(test >= 97 && test <= 122) {
+            if(c >= 'a' && c <= 'z') {
                 s.push(c); 
                 auxString += c;   
             }
