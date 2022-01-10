@@ -24,9 +24,9 @@ public class ClimbbingLeaderBoard {
 		
 		//Look for an insertion point for each one of the scores in player
 		//add that index into the rankedForPlayer array
-		
+		int i = table.size();
 		for(int score:player) {
-			int i = table.size();
+			
 			while(i > 0 && table.get(i-1) <= score) i--;
 			
 			rankedForPalyer.add(i+1);
