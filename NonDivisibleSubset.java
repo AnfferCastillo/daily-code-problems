@@ -14,27 +14,27 @@ public class NonDivisibleSubset {
 	//valid = true
 	public static void getSet(List<Integer> s, List<Integer> originalSet, int divisor, int index, int ref) {
 
-		if (index >= originalSet.size()) {
-			return;
-		}
-
-		var isValid = true;
-		var j = 0;
-		while (j < s.size() && isValid) {
-			if(originalSet.get(index) != ref) {
-				isValid = (s.get(j) + originalSet.get(index)) % divisor != 0;
-			} else {
-				isValid = false;
+			if (index >= originalSet.size()) {
+				return;
 			}
-			
-			j++;
-		}
-
-		if (isValid) {
-			s.add(originalSet.get(index));
-		}
-
-		getSet(s, originalSet, divisor, index + 1, ref);
+	
+			var isValid = true;
+			var j = 0;
+			while (j < s.size() && isValid) {
+				if(originalSet.get(index) != ref) {
+					isValid = (s.get(j) + originalSet.get(index)) % divisor != 0;
+				} else {
+					isValid = false;
+				}
+				
+				j++;
+			}
+	
+			if (isValid) {
+				s.add(originalSet.get(index));
+			}
+	
+			getSet(s, originalSet, divisor, index + 1, ref);
 
 	}
 	
