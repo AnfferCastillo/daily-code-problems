@@ -7,35 +7,6 @@ public class QueensAttackII {
 	// Crear una matriz NxN, llena de 0 en posiciones sin obstaculos y 1 donde hayan obstaculos
 	// Hacer un depth first para las 8 direcciones que ataca la reina y por cada iteracion sin obstaculos sumar 1
 	
-	// [(5,5), (4,2), (2,3)]
-	/**
-	 * [[],
-	 * 	[],
-	 * 	[],
-	 * 	[],
-	 * 	[]]
-	 * @param obstacles
-	 * @param n
-	 * @return
-	 */
-	public static int[][] fillBoard(List<List<Integer>> obstacles, int n) {
-		var board = new int[n][n];
-		
-		// n = (4,4)
-		for(var i = n-1; i >= 0; i--) {
-			board[i] = new int[n];
-			for(var j = 0; j < n; j++) {
-				if(thereIsAnObstacle(i,j, obstacles)) {
-					board[i][j] = 1;
-				}
-			}
-		}
-		
-		
-		return board;
-		
-	}
-	
 	private static boolean thereIsAnObstacle(int i, int j, List<List<Integer>> obstacles) {
 		var test = obstacles.stream().filter(rc -> rc.get(0) == i && rc.get(1) == j).findAny();
 		return test.isPresent();
