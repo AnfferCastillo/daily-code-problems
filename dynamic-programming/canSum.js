@@ -30,10 +30,30 @@ const canSum = (target, numbers, memo = {}) => {
   return false;
 };
 
+const canSumTab = (target, numbers) => {
+  const table = Array(target + 1).fill(false);
+  table[0] = true; //siempre es posible hacer una suma 0, no se toma ningun elemento del array
+
+  for (let i = 0; i <= target; i++) {
+    for (let j = 0; j < numbers.length; j++) {
+      if (i + numbers[j] < table.length && table[i]) table[i + numbers[j]] = table[i];
+    }
+  }
+
+  return table[target];
+};
+
+console.log('Recursivo: ');
 console.log(canSum(7, [5, 3, 4, 7]));
 console.log(canSum(7, [5, 3, 25, 43]));
 console.log(canSum(100, [1, 1, 1, 1, 1, 1, 1]));
 console.log(canSum(300, [7, 14]));
+
+console.log('ITerativo');
+console.log(canSumTab(7, [5, 3, 4, 7])); //false
+console.log(canSumTab(7, [5, 3, 25, 43])); //false
+console.log(canSumTab(100, [1, 1, 1, 1, 1, 1, 1])); //true
+console.log(canSumTab(300, [7, 14])); //
 
 /**
  * Sin memoización
