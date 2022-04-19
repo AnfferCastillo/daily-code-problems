@@ -33,3 +33,4 @@ const depthFirstPrintRecursive = (graph, source) => {
 
 //depthFirstPrint(graph, 'a');
 depthFirstPrintRecursive(graph, 'a');
+depthFirstPrint(graph, 'a');
