@@ -55,9 +55,25 @@ const maxPackage = (weights) => {
   return stack[0];
 };
 
-console.log(maxPackage([2, 9, 10, 3, 7])); // 21
-console.log(maxPackage([2, 9, 10, 3, 20])); // 44
-console.log(maxPackage([30, 15, 5, 9])); // 30
-console.log(maxPackage([6, 7, 10, 20, 1, 16, 14, 18, 15, 19])); // 126
-console.log(maxPackage([6, 7, 10, 20, 1, 1, 1, 1, 1, 1])); // 43
-console.log(maxPackage([2, 2]));
+const packageMergin2 = (weights) => {
+  if (weights.length == 2) {
+    if (weights[1] > weights[0]) return weights[0] + weights[1];
+  }
+
+  while (weights.length >= 2) {
+    const weightB = weights.pop();
+    const weightA = weights.pop();
+
+    if (weightB > weightA) weights.push(weightB + weightA);
+    else weights.push(weightA);
+  }
+
+  return weights[0];
+};
+
+console.log(packageMergin2([2, 9, 10, 3, 7])); // 21
+console.log(packageMergin2([2, 9, 10, 3, 20])); // 44
+console.log(packageMergin2([30, 15, 5, 9])); // 30
+console.log(packageMergin2([6, 7, 10, 20, 1, 16, 14, 18, 15, 19])); // 126
+console.log(packageMergin2([6, 7, 10, 20, 1, 1, 1, 1, 1, 1])); // 43
+console.log(packageMergin2([2, 2])); //2
