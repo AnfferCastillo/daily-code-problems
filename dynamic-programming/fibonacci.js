@@ -52,10 +52,12 @@ const fiboTab2 = (n) => {
   if (n == 0) return [];
   if (n == 1) return [1];
 
-  const fib = [1, 1];
+  const fib = Array(n).fill(0);
+  fib[0] = 1;
+  fib[1] = 1;
 
-  for (let i = fib.length; i < n; i++) {
-    fib.push(fib[i - 1] + fib[i - 2]);
+  for (let i = 2; i < n; i++) {
+    fib[i] = fib[i - 1] + fib[i - 2];
   }
 
   return fib;
@@ -67,6 +69,7 @@ console.log(fiboTab(15)); //1
 console.log(fiboTab(0)); //1
 console.log(fiboTab(1)); //1 */
 
+console.log(fiboTab2(2));
 console.log(fiboTab2(3));
 console.log(fiboTab2(5));
 console.log(fiboTab2(20));
