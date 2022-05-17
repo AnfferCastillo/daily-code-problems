@@ -1,3 +1,4 @@
+package hackerrank;
 
 public class TestClass {
 	
@@ -5,9 +6,9 @@ public class TestClass {
 		String message = "Welcome to this interview, !"
 				+ " What is the MOST frequent non-whitespace character in this String?";
 
-		MostFrequentCharacterCounter characterCounter = new MostFrequentCharacterCounter(message);
+		//MostFrequentCharacterCounter characterCounter = new MostFrequentCharacterCounter(message);
 
-		System.out.println("result: [" + characterCounter.getMostFrequentCharacter() + "]");
+		//System.out.println("result: [" + characterCounter.getMostFrequentCharacter() + "]");
 	}
 
 }
