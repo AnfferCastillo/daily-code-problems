@@ -16,9 +16,16 @@ public class LongestSubstringNoCahrsRep3 {
     public int lengthOfLongestSubstring(String s) {
 
         var maxCount = 0;
-
+        var charCount = new HashSet<Character>();
+        var subsTring = "";
         for(var i = 0; i < s.length(); i++) {
-            var count = 1;
+            if(charCount.add(s.charAt(i))) {
+
+            } else {
+
+            }
+
+           /* var count = 1;
             var j = i+1;
             var charCount = new HashSet<Character>();
             charCount.add(s.charAt(i));
@@ -31,7 +38,7 @@ public class LongestSubstringNoCahrsRep3 {
 
             if(j == s.length()) {
                 return maxCount;
-            }
+            }*/
         }
 
         return maxCount;
