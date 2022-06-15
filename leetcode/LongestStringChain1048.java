@@ -38,34 +38,37 @@ public class LongestStringChain1048 {
   public static void main(String[] args) {
     //
     var test = new LongestStringChain1048();
-    System.out.println(test.longestStrChain(new String[] {"a", "b", "ba", "bca", "bda", "bdca"}));//4
-    System.out.println(test.longestStrChain(new String[] {"xbc","pcxbcf","xb","cxbc","pcxbc"}));//5
-    System.out.println(test.longestStrChain(new String[] {"abcd","dbqca"}));//1
-
+    System.out.println(
+        test.longestStrChain(new String[] {"a", "b", "ba", "bca", "bda", "bdca"})); // 4
+    System.out.println(
+        test.longestStrChain(new String[] {"xbc", "pcxbcf", "xb", "cxbc", "pcxbc"})); // 5
+    System.out.println(test.longestStrChain(new String[] {"abcd", "dbqca"})); // 1
   }
 
   public int longestStrChain(String[] words) {
     Arrays.sort(words, (a, b) -> a.length() - b.length());
     var map = new HashMap<String, Integer>();
     var max = 0;
-    for(var word: words) {
-      var current = map.getOrDefault(word, 0);
-      var count = lscTab(word, map);
-      map.put(word, Math.max(current, count +1));
-      max = map.get(word) > max ? map.get(word) : max;
+    for (var word : words) {
+      var current = map.putIfAbsent(word, 1);
+      for (int i = 0; i < word.length(); i++) {
+        var next = new StringBuilder(word).deleteCharAt(i).toString();
+        var newCount = Math.max(map.getOrDefault(next, 0) + 1, map.get(word));
+        map.put(word, newCount);
+        max = newCount > max ? newCount : max;
+      }
     }
 
     return max;
   }
 
-
   private int lscTab(String word, HashMap<String, Integer> map) {
-    if(word.length() == 0) return 0;
-    if(map.containsKey(word)) return map.get(word);
+    if (word.length() == 0) return 0;
+    if (map.containsKey(word)) return map.get(word);
 
     var maxCount = 0;
     for (int i = 0; i < word.length(); i++) {
-      var count = lscTab(word.substring(0, i) + word.substring(i+1), map);
+      var count = lscTab(word.substring(0, i) + word.substring(i + 1), map);
       maxCount = count > maxCount ? count : maxCount;
     }
 
@@ -88,9 +91,9 @@ public class LongestStringChain1048 {
     if (index + 1 >= words.length) return false;
     if (words[index].length() > (words[index + 1].length() + 1)) return false;
     if (words[index].length() == words[index + 1].length()) return false;
-    var word = words[index +1];
+    var word = words[index + 1];
     for (var i = 0; i < word.length(); i++) {
-      var position =     words[index].lastIndexOf(word.charAt(i));
+      var position = words[index].lastIndexOf(word.charAt(i));
       if (position < 0 || position < i) return false;
     }
     return true;
