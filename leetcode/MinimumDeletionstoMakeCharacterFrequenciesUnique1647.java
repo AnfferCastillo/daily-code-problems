@@ -32,7 +32,6 @@ public class MinimumDeletionstoMakeCharacterFrequenciesUnique1647 {
                 set.add(frecuency);
         }
 
-
         return count;
     }
 }
