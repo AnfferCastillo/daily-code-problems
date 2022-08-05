@@ -9,6 +9,7 @@ public class ValidParentheses20 {
     System.out.println(test.isValid("()")); // true
       System.out.println(test.isValid("()[]{}")); // true
       System.out.println(test.isValid("(]")); // false
+	System.out.print("Testing");					      
   }
 
     public boolean isValid(String s) {
