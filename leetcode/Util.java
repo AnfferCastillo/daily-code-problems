@@ -11,6 +11,22 @@ public class Util {
     System.out.println();
   }
 
+  public static void assertEquals(String expected, String actual) {
+    if(!expected.equals(actual)) {
+      throw new AssertionError(String.format("Expected: %s but Actual: %s ---- FAILED!", expected, actual));
+    } else {
+      System.out.println(String.format("Expected: %s - Actual: %s ---- PASS!", expected, actual));
+    }
+  }
+
+  public static void assertEquals(int expected, int actual) {
+    if(actual != expected) {
+      throw new AssertionError(String.format("Expected: %s but Actual: %s ---- FAILED!", expected, actual));
+    } else {
+      System.out.println(String.format("Expected: %s - Actual: %s ---- PASS!", expected, actual));
+    }
+  }
+
   public static ListNode buildList(int[] numbers) {
     var root = new ListNode(numbers[0]);
     ListNode previous = null;
