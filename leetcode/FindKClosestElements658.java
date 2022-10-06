@@ -68,7 +68,7 @@ public class FindKClosestElements658 {
             }
 
         }
-        result.sort((a,b) -> a-b);
+        result.sort(Integer::compareTo);
 
         return result;
     }
